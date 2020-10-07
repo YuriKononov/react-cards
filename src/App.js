@@ -1,12 +1,18 @@
 import React from 'react';
-import Header from './components/header/header'
-import Album from './components/Album'
+import { Route, BrowserRouter, Switch } from 'react-router-dom'
+import User from './components/User'
+import Home from './components/Home'
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Album />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/user/:id' component={User} />
+        </Switch>
+      </div>
+    </BrowserRouter>
+    
   );
 }
 

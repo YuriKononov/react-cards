@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom'
 import Menu from '@material-ui/core/Menu';
 import Popper from '@material-ui/core/Popper';
 import Grow from '@material-ui/core/Grow';
@@ -56,6 +56,11 @@ const useStyles = makeStyles((theme) => ({
     },
     cardContent: {
       flexGrow: 1,
+    },
+    link:{
+      outline: "none",
+      textDecoration: "none",
+      color: "black"
     },
     footer: {
       backgroundColor: theme.palette.background.paper,
@@ -126,7 +131,9 @@ export default function CardItem(props) {
                                 <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
                                     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                    <MenuItem onClick={handleClose}>
+                                      <Link className = {classes.link} to = {`/user/${user.id}`}>Profile</Link>
+                                      </MenuItem>
                                     <MenuItem onClick={handleClose}>Delete</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
