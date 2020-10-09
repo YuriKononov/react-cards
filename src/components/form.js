@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from "axios";
-import { Container } from '@material-ui/core';
+
 
 export default function AddForm() {
     const [open, setOpen] = React.useState(false);
@@ -31,9 +31,10 @@ export default function AddForm() {
     };
     const sendData = async () => {
        await axios.post('http://localhost:8080/cards', {name:data.name, email:data.email, company:data.company, description:data.description});
+       window.location.reload()
     }
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         sendData();
         console.log(data);
 

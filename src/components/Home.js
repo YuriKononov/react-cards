@@ -1,6 +1,7 @@
-import React from 'react';
+import React ,{useState, useEffect} from 'react';
 import Header from '../components/header/header'
 import Album from './Album';
+
 
 
 function Home() {

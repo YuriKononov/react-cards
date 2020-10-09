@@ -81,24 +81,7 @@ export default function CardItem(props) {
   };
 
 
-  const deleteUser = async (_id) => {
-    try{
-      await axios(
-        {
-          method: "DELETE",
-          url: "http://localhost:8080/cards",
-          data: {
-            _id
-          }
-        }
-      );
-      
-      
-    }
-    catch(error){
-      throw(error)
-    }
-  }
+  
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
@@ -147,7 +130,7 @@ export default function CardItem(props) {
                                     <MenuItem onClick={handleClose}>
                                       <Link className = {classes.link} to = {`/user/${user._id}`}>Profile</Link>
                                       </MenuItem>
-                                    <MenuItem onClick={deleteUser(user._id)}>Delete</MenuItem>
+                                    <MenuItem onClick={() => (props.deleteUser(user._id))}>Delete</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                                 </Paper>

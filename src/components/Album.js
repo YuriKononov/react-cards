@@ -43,7 +43,30 @@ const useStyles = makeStyles((theme) => ({
 export default function Album(props) {
   const classes = useStyles();
   const [users, setUsers] = useState([])
-  
+
+  const deleteUser = async (_id) => {
+    try{
+      const users =
+      await axios(
+        {
+          method: "DELETE",
+          url: "http://localhost:8080/cards",
+          data: {
+            _id
+          }
+        }
+      );
+      console.log(users)
+      //const {data} = await axios.get('http://localhost:8080/cards')
+      //setUsers(data)
+      setUsers(users.data)
+      
+      
+    }
+    catch(error){
+      throw(error)
+    }
+  }
 
   const getUsers = async () => {
     try {
@@ -75,6 +98,7 @@ export default function Album(props) {
               <Grid item key={user._id} xs={12} sm={4} md={4}>
                 <CardItem
                 key = {user._id}
+                deleteUser = {deleteUser}
                 user = {user} />
               </Grid>
             )):<p>Loading...</p>
