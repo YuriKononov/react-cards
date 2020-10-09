@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import {withRouter} from 'react-router-dom'
 const useStyles = makeStyles({
     root: {
       maxWidth: 345,
@@ -24,6 +24,26 @@ const User = (props) => {
     const [user, setUser] = useState(null);
     const classes = useStyles();
     let _id = props.match.params.id;
+
+
+    const deleteUser = async () => {
+      try{
+        await axios(
+          {
+            method: "DELETE",
+            url: "http://localhost:8080/cards",
+            data: {
+              _id
+            }
+          }
+        )
+        props.history.push('/contacts')
+
+      }
+      catch(error){
+        throw(error)
+      }
+    }
 
     const getUser = async () => {
         try {
@@ -65,7 +85,7 @@ const User = (props) => {
                     </CardContent>
                     </CardActionArea>
                     <CardActions>
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" onClick={deleteUser}>
                     Delete
                     </Button>
                     <Button size="small" color="primary">
@@ -78,4 +98,4 @@ const User = (props) => {
     )   
 }
 
-export default User
+export default withRouter(User)

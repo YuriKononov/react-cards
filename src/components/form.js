@@ -4,13 +4,24 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+import { makeStyles } from '@material-ui/core/styles';
+
 import DialogTitle from '@material-ui/core/DialogTitle';
+import axios from "axios";
+import { Container } from '@material-ui/core';
 
 export default function AddForm() {
     const [open, setOpen] = React.useState(false);
     const [data, setData] = useState({name:'',email:'',company:'',description:''})
   
+    const useStyles = makeStyles((theme) => ({
+        button: {
+            margin: theme.spacing(5,3,0),
+          },
+        
+      }));
+
+
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -18,10 +29,14 @@ export default function AddForm() {
     const handleClose = () => {
       setOpen(false);
     };
+    const sendData = async () => {
+       await axios.post('http://localhost:8080/cards', {name:data.name, email:data.email, company:data.company, description:data.description});
+    }
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(data)
-        
+        sendData();
+        console.log(data);
+
     }
     const handleNameChange =(e) => {
         setData({...data, name: e.target.value });
@@ -35,10 +50,12 @@ export default function AddForm() {
     const handleDescriptionChange =(e) => {
         setData({...data, description: e.target.value });
     }
-  
+    
+    const classes = useStyles();
     return (
       <div>
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          
+          <Button className={classes.button} variant="outlined" color="primary" onClick={handleClickOpen}>
           Add new person
         </Button>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -89,6 +106,7 @@ export default function AddForm() {
             </Button>
           </DialogActions>
         </Dialog>
+         
       </div>
     );
   }

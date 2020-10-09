@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Album from '../Album';
 import AddForm from '../form';
+import { Container } from '@material-ui/core';
 
 
 export default function Contacts() {
@@ -19,8 +20,11 @@ export default function Contacts() {
     return (
         <>
             <MenuAppBar />
-            <AddForm />
-            <Album />
+            <Container maxWidth="md">
+                <AddForm />
+                <Album />
+            </Container>
+            
             
         </>
     )

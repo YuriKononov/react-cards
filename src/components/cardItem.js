@@ -15,6 +15,7 @@ import Paper from '@material-ui/core/Paper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -79,6 +80,26 @@ export default function CardItem(props) {
     setOpen(false);
   };
 
+
+  const deleteUser = async (_id) => {
+    try{
+      await axios(
+        {
+          method: "DELETE",
+          url: "http://localhost:8080/cards",
+          data: {
+            _id
+          }
+        }
+      );
+      
+      
+    }
+    catch(error){
+      throw(error)
+    }
+  }
+
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -126,7 +147,7 @@ export default function CardItem(props) {
                                     <MenuItem onClick={handleClose}>
                                       <Link className = {classes.link} to = {`/user/${user._id}`}>Profile</Link>
                                       </MenuItem>
-                                    <MenuItem onClick={handleClose}>Delete</MenuItem>
+                                    <MenuItem onClick={deleteUser(user._id)}>Delete</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                                 </Paper>

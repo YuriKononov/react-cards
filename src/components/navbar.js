@@ -39,7 +39,7 @@ export default function ButtonAppBar() {
             This is the project
           </Typography>
           <Link to={`/`} className = {classes.link}><Button color="inherit">Main</Button></Link>
-          <Link to={`/contacts`} className = {classes.link}><Button color="inherit">Contacts</Button></Link>
+          <Link to={`/contacts`} className = {classes.link}><Button color="inherit">Users</Button></Link>
           <Button color="inherit">About</Button>
           <Button color="inherit">More</Button>
         </Toolbar>
