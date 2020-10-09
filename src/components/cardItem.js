@@ -130,7 +130,7 @@ export default function CardItem(props) {
                                     <MenuItem onClick={handleClose}>
                                       <Link className = {classes.link} to = {`/user/${user._id}`}>Profile</Link>
                                       </MenuItem>
-                                    <MenuItem onClick={() => (props.deleteUser(user._id))}>Delete</MenuItem>
+                                    <MenuItem onClick={() => (props.deleteUsers(user._id))}>Delete</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                                 </Paper>

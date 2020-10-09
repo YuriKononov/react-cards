@@ -1,5 +1,5 @@
 import React ,{useState, useEffect} from 'react';
-import axios from "axios";
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,46 +42,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Album(props) {
   const classes = useStyles();
-  const [users, setUsers] = useState([])
-
-  const deleteUser = async (_id) => {
-    try{
-      const users =
-      await axios(
-        {
-          method: "DELETE",
-          url: "http://localhost:8080/cards",
-          data: {
-            _id
-          }
-        }
-      );
-      console.log(users)
-      //const {data} = await axios.get('http://localhost:8080/cards')
-      //setUsers(data)
-      setUsers(users.data)
-      
-      
-    }
-    catch(error){
-      throw(error)
-    }
-  }
-
-  const getUsers = async () => {
-    try {
-        //const {data} = await axios.get('https://jsonplaceholder.typicode.com/users')
-        const {data} = await axios.get('http://localhost:8080/cards')
-        setUsers(data)
-    }
-    catch(error){
-        throw(error)
-    }
-    
-  }
-  useEffect(() => {
-    getUsers();
-  },[])
   
 
   return (
@@ -92,13 +52,14 @@ export default function Album(props) {
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {users.length?
-            users.slice(0, props.limit)
+            {
+            props.users && props.users.length?
+            props.users.slice(0, props.limit)
             .map((user) => (
               <Grid item key={user._id} xs={12} sm={4} md={4}>
                 <CardItem
                 key = {user._id}
-                deleteUser = {deleteUser}
+                deleteUsers = {props.deleteUsers}
                 user = {user} />
               </Grid>
             )):<p>Loading...</p>
