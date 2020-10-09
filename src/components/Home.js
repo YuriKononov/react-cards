@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from '../components/header/header'
-import Album from '../components/Album'
+import Album from './Album';
 
 
 function Home() {
     return (
         <>
           <Header />
-          <Album />
+          <Album limit = {3}/>
         </>
       
     );

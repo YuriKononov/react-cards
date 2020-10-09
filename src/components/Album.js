@@ -40,14 +40,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Album() {
+export default function Album(props) {
   const classes = useStyles();
   const [users, setUsers] = useState([])
   
 
   const getUsers = async () => {
     try {
-        const {data} = await axios.get('https://jsonplaceholder.typicode.com/users')
+        //const {data} = await axios.get('https://jsonplaceholder.typicode.com/users')
+        const {data} = await axios.get('http://localhost:8080/cards')
         setUsers(data)
     }
     catch(error){
@@ -69,10 +70,11 @@ export default function Album() {
           {/* End hero unit */}
           <Grid container spacing={4}>
             {users.length?
-            users.map((user) => (
-              <Grid item key={user.id} xs={12} sm={4} md={4}>
+            users.slice(0, props.limit)
+            .map((user) => (
+              <Grid item key={user._id} xs={12} sm={4} md={4}>
                 <CardItem
-                key = {user.id}
+                key = {user._id}
                 user = {user} />
               </Grid>
             )):<p>Loading...</p>

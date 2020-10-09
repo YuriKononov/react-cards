@@ -23,13 +23,14 @@ const useStyles = makeStyles({
 const User = (props) => {
     const [user, setUser] = useState(null);
     const classes = useStyles();
-    let id = props.match.params.id;
+    let _id = props.match.params.id;
 
     const getUser = async () => {
         try {
-            const {data} = await axios.get('https://jsonplaceholder.typicode.com/users/' + id)
-            console.log(data)
-            setUser(data)
+            const {data} = await axios.get('http://localhost:8080/cards')
+            console.log(_id)
+            const user = data.find(user => user._id ==_id)
+            setUser(user)
             console.log(user)
         }
         catch(error){
@@ -51,14 +52,14 @@ const User = (props) => {
                 <CardActionArea>
                     <CardMedia
                     className={classes.media}
-                    image={"https://robohash.org/"+user.id}
+                    image={"https://robohash.org/"+user._id}
                     />
                     <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         {user.name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {user.email}, {user.company.catchPhrase}
+                        {user.email}
                     </Typography>
                     
                     </CardContent>
