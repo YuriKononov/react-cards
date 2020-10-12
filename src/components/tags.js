@@ -22,31 +22,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Tags(props) {
   const classes = useStyles();
-  const [chipData, setChipData] = React.useState([
-    
-  ]);
+  //const [chipData, setChipData] = React.useState(
+    //props.tags
+  //);
+
 
   const addNewTag = (labelFromForm) => {
-      
-    const newTag = {key: Math.random(), label: labelFromForm};
-    console.log('new tag',newTag);
-    setChipData([...chipData, newTag]);
     props.addTag(labelFromForm);
   }
 
-  const handleDelete = (chipToDelete) => () => {
-    setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
-  };
 
   return (
     <Paper component="ul" className={classes.root}>
-      {props.tags.map((tag, i) => {
+      {props.tags.map((tag) => {
 
         return (
-          <li key={i}>
+          <li key={tag}>
             <Chip
               label={tag}
-              onDelete={handleDelete(tag)}
+              onDelete={() => {props.deleteTag(tag)}}
               className={classes.chip}
             />
           </li>

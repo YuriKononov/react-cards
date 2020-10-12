@@ -87,8 +87,21 @@ const User = (props) => {
 
     const addTag = (tag) => {
       const tempUser = {...user};
-      tempUser.tags.push(tag);
+      if (tempUser.tags.includes(tag)){
+        console.log('Already exists!')
+      }
+      else{
+        tempUser.tags.push(tag)
+      }
+      
       editUser(tempUser);
+    }
+
+    const deleteTag = (tagToDelete) => {
+      console.log(tagToDelete)
+      const newTags = [...user.tags].filter((tag) => tag !== tagToDelete);
+      const tempUser = {...user, tags:newTags};
+      editUser(tempUser)
     }
 
     const deleteUser = async () => {
@@ -152,7 +165,7 @@ const User = (props) => {
                 </CardActions>
                 
             </Card>
-            <Tags addTag={addTag} tags={user.tags}/>
+            <Tags addTag={addTag} tags={user.tags} deleteTag = {deleteTag}/>
             </div>
             <Card className={classes.desc}>
                     <CardContent>
