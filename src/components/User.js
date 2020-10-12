@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {withRouter} from 'react-router-dom';
 import EditForm from './editForm';
+import Tags from './tags'
 
 
 const useStyles = makeStyles({
@@ -45,6 +46,10 @@ const useStyles = makeStyles({
       marginRight: "auto",
       maxWidth: 400,
       minWidth: 250,
+    },
+    userAndTags:{
+      display: "flex",
+      flexDirection: "column"
     }
   });
 
@@ -66,10 +71,7 @@ const User = (props) => {
             url: "http://localhost:8080/cards",
             data: {
               _id : props.match.params.id,
-              name: formData.name,
-              company: formData.company,
-              email: formData.email,
-              description: formData.description
+              ...formData
             }
           }
           
@@ -83,6 +85,11 @@ const User = (props) => {
       }
     }
 
+    const addTag = (tag) => {
+      const tempUser = {...user};
+      tempUser.tags.push(tag);
+      editUser(tempUser);
+    }
 
     const deleteUser = async () => {
       try{
@@ -127,7 +134,7 @@ const User = (props) => {
             <MenuAppBar />
             {user ? 
             <div className={classes.userPage}>
-
+              <div className={classes.userAndTags}>
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia
@@ -143,8 +150,10 @@ const User = (props) => {
                     formName = 'Edit'
                     editUser = {editUser}/>
                 </CardActions>
+                
             </Card>
-            
+            <Tags addTag={addTag} tags={user.tags}/>
+            </div>
             <Card className={classes.desc}>
                     <CardContent>
                       <Typography variant='h4'component="h3" gutterBottom>
@@ -161,6 +170,7 @@ const User = (props) => {
                       </Typography>
                     </CardContent>
             </Card>
+            
             </div>
             :<p>loading...</p>}
             

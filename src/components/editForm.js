@@ -18,18 +18,7 @@ export default function EditForm(props) {
         description: props.data.description
     })
     
-    const handleNameChange =(e) => {
-        setFormData({...formData, name: e.target.value });
-    }
-    const handleEmailChange =(e) => {
-        setFormData({...formData, email: e.target.value });
-    }
-    const handleCompanyChange =(e) => {
-        setFormData({...formData, company: e.target.value });
-    }
-    const handleDescriptionChange =(e) => {
-        setFormData({...formData, description: e.target.value });
-    }
+    
 
     const handleOnChange = (e) => {
         setFormData({...formData, [e.target.name]:e.target.value})
@@ -45,11 +34,11 @@ export default function EditForm(props) {
 
     const handleClickOpen = () => {
       setOpen(true);
+      setFormData(props.data);
     };
   
     const handleClose = () => {
       setOpen(false);
-      setFormData(props.data);
     };
     
     const handleSubmit = (e) => {
@@ -76,7 +65,7 @@ export default function EditForm(props) {
               id="name"
               label="Name"
               fullWidth
-              onChange={handleNameChange}
+              onChange={handleOnChange}
               value={formData.name}
             />
             <TextField
@@ -85,7 +74,7 @@ export default function EditForm(props) {
               id="email"
               label="Email Address"
               fullWidth
-              onChange={handleEmailChange}
+              onChange={handleOnChange}
               value={formData.email}
             />
             <TextField
@@ -93,7 +82,7 @@ export default function EditForm(props) {
               margin="dense"
               id="company"
               label="Company"
-              onChange={handleCompanyChange}
+              onChange={handleOnChange}
               value={formData.company}
               fullWidth
             />
@@ -102,7 +91,7 @@ export default function EditForm(props) {
               margin="dense"
               id="description"
               label="Description"
-              onChange={handleDescriptionChange}
+              onChange={handleOnChange}
               value={formData.description}
               fullWidth
             />
