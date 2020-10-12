@@ -9,9 +9,31 @@ import { makeStyles } from '@material-ui/core/styles';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 
-export default function AddForm(props) {
+export default function EditForm(props) {
     const [open, setOpen] = React.useState(false);
+    const [formData, setFormData] = useState({
+        name: props.data.name,
+        email: props.data.email,
+        company: props.data.company,
+        description: props.data.description
+    })
     
+    const handleNameChange =(e) => {
+        setFormData({...formData, name: e.target.value });
+    }
+    const handleEmailChange =(e) => {
+        setFormData({...formData, email: e.target.value });
+    }
+    const handleCompanyChange =(e) => {
+        setFormData({...formData, company: e.target.value });
+    }
+    const handleDescriptionChange =(e) => {
+        setFormData({...formData, description: e.target.value });
+    }
+
+    const handleOnChange = (e) => {
+        setFormData({...formData, [e.target.name]:e.target.value})
+    }
   
     const useStyles = makeStyles((theme) => ({
         button: {
@@ -27,11 +49,12 @@ export default function AddForm(props) {
   
     const handleClose = () => {
       setOpen(false);
+      setFormData(props.data);
     };
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.handleSubmit(e);
+        props.editUser(formData);
         handleClose();
     }
     
@@ -40,7 +63,7 @@ export default function AddForm(props) {
     return (
       <div>
           
-          <Button className={classes.button} variant="outlined" color="primary" onClick={handleClickOpen}>
+          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
           {props.formName}
         </Button>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -48,38 +71,39 @@ export default function AddForm(props) {
           <DialogContent>
               <form method="POST">
               <TextField
+              name="name"
               margin="dense"
               id="name"
               label="Name"
               fullWidth
-              onChange={props.handleNameChange}
-              value={props.data.name}
+              onChange={handleNameChange}
+              value={formData.name}
             />
             <TextField
-              
+              name="email"
               margin="dense"
               id="email"
               label="Email Address"
               fullWidth
-              onChange={props.handleEmailChange}
-              value={props.data.email}
+              onChange={handleEmailChange}
+              value={formData.email}
             />
             <TextField
-             
+             name='company'
               margin="dense"
               id="company"
               label="Company"
-              onChange={props.handleCompanyChange}
-              value={props.data.company}
+              onChange={handleCompanyChange}
+              value={formData.company}
               fullWidth
             />
             <TextField
-              
+              name="description"
               margin="dense"
               id="description"
               label="Description"
-              onChange={props.handleDescriptionChange}
-              value={props.data.description}
+              onChange={handleDescriptionChange}
+              value={formData.description}
               fullWidth
             />
               </form>

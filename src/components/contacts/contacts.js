@@ -20,7 +20,7 @@ export default function Contacts() {
 
     const [users, setUsers] = useState([])
     const [data, setData] = useState({name:'',email:'',company:'',description:''});
-
+  
 
     const sendData = async () => {
        await axios.post('http://localhost:8080/cards', {name:data.name, email:data.email, company:data.company, description:data.description});
@@ -71,6 +71,7 @@ export default function Contacts() {
         }
       }
     
+
       const getUsers = async () => {
         try {
             //const {data} = await axios.get('https://jsonplaceholder.typicode.com/users')
@@ -90,7 +91,9 @@ export default function Contacts() {
         <>
             <MenuAppBar />
             <Container maxWidth="md">
-                <AddForm handleSubmit={handleSubmit} data ={data}
+                <AddForm formName = 'Add new user'
+                 data ={data}
+                 handleSubmit={handleSubmit}
                  handleNameChange={handleNameChange} 
                  handleEmailChange={handleEmailChange} 
                  handleCompanyChange={handleCompanyChange} 

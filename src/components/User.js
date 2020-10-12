@@ -9,14 +9,43 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
+import EditForm from './editForm';
+
+
 const useStyles = makeStyles({
     root: {
-      maxWidth: 345,
+      marginTop: 10,
+      maxWidth: 400,
+      marginLeft: "auto",
+      marginRight: "auto"
     },
     media: {
-      height: 140,
+      minHeight: 250,
+      minWidth: 250
     },
+    userPage:{
+      marginTop: 30,
+      maxWidth: 800,
+      marginLeft: "auto",
+      marginRight: "auto",
+      display: "flex",
+      justifyContent: "center",
+      flexWrap: "wrap"
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+    desc :{
+      marginTop: 10,
+      marginLeft: "auto",
+      marginRight: "auto",
+      maxWidth: 400,
+      minWidth: 250,
+    }
   });
 
 
@@ -24,6 +53,35 @@ const User = (props) => {
     const [user, setUser] = useState(null);
     const classes = useStyles();
     let _id = props.match.params.id;
+
+
+
+  
+
+    const editUser = async (formData) => {
+      try {
+        const {data} = await axios(
+          {
+            method: "PATCH",
+            url: "http://localhost:8080/cards",
+            data: {
+              _id : props.match.params.id,
+              name: formData.name,
+              company: formData.company,
+              email: formData.email,
+              description: formData.description
+            }
+          }
+          
+        );
+        console.log('data', data)
+        const user = data.find(user => user._id ==_id)
+        setUser(user)
+      }
+      catch(error){
+        throw(error)
+      }
+    }
 
 
     const deleteUser = async () => {
@@ -68,33 +126,46 @@ const User = (props) => {
             
             <MenuAppBar />
             {user ? 
+            <div className={classes.userPage}>
+
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia
                     className={classes.media}
                     image={"https://robohash.org/"+user._id}
                     />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {user.name}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {user.email}
-                    </Typography>
-                    
-                    </CardContent>
                     </CardActionArea>
                     <CardActions>
-                    <Button size="small" color="primary" onClick={deleteUser}>
+                    <Button  color="primary" onClick={deleteUser} variant="outlined">
                     Delete
                     </Button>
-                    <Button size="small" color="primary">
-                    Edit
-                    </Button>
+                    <EditForm data = {user}
+                    formName = 'Edit'
+                    editUser = {editUser}/>
                 </CardActions>
             </Card>
+            
+            <Card className={classes.desc}>
+                    <CardContent>
+                      <Typography variant='h4'component="h3" gutterBottom>
+                      {user.name}
+                      </Typography>
+                      <Typography variant="h5" component="h3">
+                      {user.email}
+                      </Typography>
+                      <Typography className={classes.pos} color="textSecondary">
+                        {user.company}
+                      </Typography>
+                      <Typography variant="body2" component="p">
+                        {user.description}
+                      </Typography>
+                    </CardContent>
+            </Card>
+            </div>
             :<p>loading...</p>}
-            </>
+            
+        </>
+            
     )   
 }
 
