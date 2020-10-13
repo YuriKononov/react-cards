@@ -32,28 +32,30 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function LoginForm() {
+function LoginForm(props) {
 
-    const [data, setData] = useState({email:'', password:'', name:'', repeatedPassword:''})
+    const [data, setData] = useState({email:'', password:''})
 
 const sendData = async () => {
-    await axios.post('http://localhost:8080/signup', {email:data.email, password:data.password, name:data.name});
-
+    const res = await axios.post('http://localhost:8080/login', {email:data.email, password:data.password});
+    return res;
 }
 
 const handleOnChange = (e) => {
     setData({...data, [e.target.name]:e.target.value})
 }
 
-const handleSubmitSignUp = () => {
-    if (data.password === data.repeatedPassword){
-        sendData()
-        console.log("user with email ",data.email, ' and password ', data.password, 'signed up.');
-        setData({email:'', password:'', name:'', repeatedPassword:''})
+const handleSubmitLogin = async () => {
+    const dataFromBack = await sendData();
+    console.log(dataFromBack);
+    setData({email:'', password:''});
+    console.log(localStorage.getItem("token"))
+    if (localStorage.getItem('token') === dataFromBack.data.token){
+        console.log('already logged')
     }
-    else{
-        console.log('Passwords do not match')
-    }
+    localStorage.setItem('token', dataFromBack.data.token);
+    console.log(localStorage.getItem("token"))
+    props.history.push('/contacts');
     
 
 }
@@ -84,7 +86,7 @@ const handleSubmitSignUp = () => {
                     onChange={handleOnChange}
                 />
                 <div className={classes.btns}>
-                    <Button color="primary" onClick={handleSubmitSignUp}>
+                    <Button color="primary" onClick={handleSubmitLogin} variant="outlined">
                         Sign in
                     </Button>
                 </div>

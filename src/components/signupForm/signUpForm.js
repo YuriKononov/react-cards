@@ -32,25 +32,26 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function SignUpForm() {
+function SignUpForm(props) {
 
     const [data, setData] = useState({email:'', password:'', name:'', repeatedPassword:''})
 
 const sendData = async () => {
     const res = await axios.post('http://localhost:8080/signup', {email:data.email, password:data.password, name:data.name});
-    return res
+    return res;
 }
 
 const handleOnChange = (e) => {
     setData({...data, [e.target.name]:e.target.value})
 }
 
-const handleSubmitSignUp = () => {
+const handleSubmitSignUp = async () => {
     if (data.password === data.repeatedPassword){
-        const data = sendData();
+        const dataFromBack = await sendData();
         console.log("user with email ",data.email, ' and password ', data.password, 'signed up.');
-        console.log(data);
-        setData({email:'', password:'', name:'', repeatedPassword:''})
+        console.log(dataFromBack);
+        setData({email:'', password:'', name:'', repeatedPassword:''});
+        props.history.push('/log')
     }
     else{
         console.log('Passwords do not match')
@@ -102,7 +103,7 @@ const handleSubmitSignUp = () => {
                     onChange={handleOnChange}
                 />
                 <div className={classes.btns}>
-                    <Button color="primary" onClick={handleSubmitSignUp}>
+                    <Button color="primary" onClick={handleSubmitSignUp} variant="outlined">
                         Sign up
                     </Button>
                 </div>

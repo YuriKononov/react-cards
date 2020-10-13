@@ -50,6 +50,9 @@ const useStyles = makeStyles({
     userAndTags:{
       display: "flex",
       flexDirection: "column"
+    },
+    break:{
+      overflowWrap: "break-word"
     }
   });
 
@@ -178,7 +181,7 @@ const User = (props) => {
                       <Typography className={classes.pos} color="textSecondary">
                         {user.company}
                       </Typography>
-                      <Typography variant="body2" component="p">
+                      <Typography variant="body2" component="p" className={classes.break}>
                         {user.description}
                       </Typography>
                     </CardContent>

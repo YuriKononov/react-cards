@@ -40,8 +40,8 @@ export default function ButtonAppBar() {
           </Typography>
           <Link to={`/`} className = {classes.link}><Button color="inherit">Main</Button></Link>
           <Link to={`/contacts`} className = {classes.link}><Button color="inherit">Users</Button></Link>
-          <Button color="inherit">About</Button>
-          <Button color="inherit">More</Button>
+          <Link to={`/log`} className = {classes.link}><Button color="inherit">Sign in</Button></Link>
+          <Link to={`/reg`} className = {classes.link}><Button color="inherit">sign up</Button></Link>
         </Toolbar>
       </AppBar>
     </div>
