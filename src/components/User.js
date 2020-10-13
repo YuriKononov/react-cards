@@ -142,7 +142,7 @@ const User = (props) => {
       },[])
       console.log('user',user)
     return(
-        <>
+        <div>
             
             <MenuAppBar />
             {user ? 
@@ -187,7 +187,7 @@ const User = (props) => {
             </div>
             :<p>loading...</p>}
             
-        </>
+        </div>
             
     )   
 }
