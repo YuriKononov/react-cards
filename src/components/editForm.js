@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import { makeStyles } from '@material-ui/core/styles';
+
 
 import DialogTitle from '@material-ui/core/DialogTitle';
 
@@ -24,12 +24,7 @@ export default function EditForm(props) {
         setFormData({...formData, [e.target.name]:e.target.value})
     }
   
-    const useStyles = makeStyles((theme) => ({
-        button: {
-            margin: theme.spacing(5,3,0),
-          },
-        
-      }));
+    
 
 
     const handleClickOpen = () => {
@@ -48,7 +43,7 @@ export default function EditForm(props) {
     }
     
     
-    const classes = useStyles();
+    
     return (
       <div>
           

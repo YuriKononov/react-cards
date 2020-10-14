@@ -15,7 +15,7 @@ import Paper from '@material-ui/core/Paper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import axios from 'axios';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -109,6 +109,7 @@ export default function CardItem(props) {
                 }
                 action={
                     <div>
+                      {localStorage.getItem('name') ? 
                         <IconButton 
                             aria-label="settings"
                             ref={anchorRef}
@@ -116,8 +117,12 @@ export default function CardItem(props) {
                             aria-haspopup="true"
                             onClick={handleToggle}
                         >
+                          
                             <MoreVertIcon />
                             </IconButton>
+                            : 
+                            null}
+                            
                             <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                             {({ TransitionProps, placement }) => (
                             <Grow
@@ -125,18 +130,22 @@ export default function CardItem(props) {
                                 style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
                             >
                                 <Paper>
+                                
                                 <ClickAwayListener onClickAway={handleClose}>
-                                    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                    <MenuItem onClick={handleClose}>
-                                      <Link className = {classes.link} to = {`/user/${user._id}`}>Profile</Link>
-                                      </MenuItem>
-                                    <MenuItem onClick={() => (props.deleteUsers(user._id))}>Delete</MenuItem>
-                                    </MenuList>
-                                </ClickAwayListener>
+                                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                  <MenuItem onClick={handleClose}>
+                                    <Link className = {classes.link} to = {`/user/${user._id}`}>Profile</Link>
+                                    </MenuItem>
+                                  <MenuItem onClick={() => (props.deleteUsers(user._id))}>Delete</MenuItem>
+                                  </MenuList>
+                                  </ClickAwayListener>
+                                 
+                                
                                 </Paper>
                             </Grow>
                             )}
                         </Popper>
+                        
                     </div>
                     
                 }

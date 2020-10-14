@@ -1,4 +1,4 @@
-import React ,{useState, useEffect} from 'react';
+import React ,{useState} from 'react';
 import axios from "axios";
 import { makeStyles } from '@material-ui/core/styles';
 import Navbar from '../navbar';
@@ -37,7 +37,18 @@ function LoginForm(props) {
     const [data, setData] = useState({email:'', password:''})
 
 const sendData = async () => {
-    const res = await axios.post('http://localhost:8080/login', {email:data.email, password:data.password});
+    const res = await axios(
+        {
+          method: "POST",
+          url: "http://localhost:8080/login",
+          data: {
+            email: data.email,
+            password: data.password
+          }
+        }
+        
+      );
+    //await axios.post('http://localhost:8080/login', {email:data.email, password:data.password});
     return res;
 }
 
@@ -47,14 +58,12 @@ const handleOnChange = (e) => {
 
 const handleSubmitLogin = async () => {
     const dataFromBack = await sendData();
-    console.log(dataFromBack);
+    console.log(dataFromBack)
     setData({email:'', password:''});
-    console.log(localStorage.getItem("token"))
-    if (localStorage.getItem('token') === dataFromBack.data.token){
-        console.log('already logged')
-    }
-    localStorage.setItem('token', dataFromBack.data.token);
-    console.log(localStorage.getItem("token"))
+    localStorage.setItem('auth-token', dataFromBack.data.authToken);
+    localStorage.setItem('email', dataFromBack.data.email);
+    localStorage.setItem('_id', dataFromBack.data._id);
+    localStorage.setItem('name', dataFromBack.data.name);
     props.history.push('/contacts');
     
 

@@ -1,4 +1,4 @@
-import React ,{useState, useEffect} from 'react';
+import React ,{useState} from 'react';
 import axios from "axios";
 import { makeStyles } from '@material-ui/core/styles';
 import Navbar from '../navbar';
@@ -49,7 +49,6 @@ const handleSubmitSignUp = async () => {
     if (data.password === data.repeatedPassword){
         const dataFromBack = await sendData();
         console.log("user with email ",data.email, ' and password ', data.password, 'signed up.');
-        console.log(dataFromBack);
         setData({email:'', password:'', name:'', repeatedPassword:''});
         props.history.push('/log')
     }

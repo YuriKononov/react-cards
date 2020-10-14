@@ -80,7 +80,7 @@ const User = (props) => {
           
         );
         console.log('data', data)
-        const user = data.find(user => user._id ==_id)
+        const user = data.find(user => user._id ===_id)
         setUser(user)
       }
       catch(error){
@@ -130,7 +130,7 @@ const User = (props) => {
         try {
             const {data} = await axios.get('http://localhost:8080/cards')
             console.log(_id)
-            const user = data.find(user => user._id ==_id)
+            const user = data.find(user => user._id ===_id)
             setUser(user)
             console.log(user)
         }

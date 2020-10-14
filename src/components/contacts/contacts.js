@@ -1,6 +1,5 @@
 import React ,{useState, useEffect} from 'react';
 import MenuAppBar from '../navbar';
-import { makeStyles } from '@material-ui/core/styles';
 import axios from "axios";
 import Album from '../Album';
 import AddForm from '../form';
@@ -8,14 +7,6 @@ import { Container } from '@material-ui/core';
 
 
 export default function Contacts() {
-    const useStyles = makeStyles((theme) => ({
-        heroContent: {
-            minHeight: "50vh",
-            background: "linear-gradient(to top left, powderblue, pink)",
-            padding: theme.spacing(30,0,30),
-          },
-        
-      }));
 
 
     const [users, setUsers] = useState([])
@@ -86,12 +77,11 @@ export default function Contacts() {
       useEffect(() => {
         getUsers();
       },[])
-    const classes = useStyles();
     return (
         <>
             <MenuAppBar />
             <Container maxWidth="md">
-                <AddForm formName = 'Add new user'
+                <AddForm formName = 'Add new developer'
                  data ={data}
                  handleSubmit={handleSubmit}
                  handleNameChange={handleNameChange} 
