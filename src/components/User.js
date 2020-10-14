@@ -64,8 +64,6 @@ const User = (props) => {
 
 
 
-  
-
     const editUser = async (formData) => {
       try {
         const {data} = await axios(

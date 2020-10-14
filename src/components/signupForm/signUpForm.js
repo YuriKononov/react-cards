@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
 function SignUpForm(props) {
 
     const [data, setData] = useState({email:'', password:'', name:'', repeatedPassword:''})
-
-const sendData = async () => {
+//added
+const sendDataSignUp = async () => {
     const res = await axios.post('http://localhost:8080/signup', {email:data.email, password:data.password, name:data.name});
     return res;
 }
@@ -47,7 +47,7 @@ const handleOnChange = (e) => {
 
 const handleSubmitSignUp = async () => {
     if (data.password === data.repeatedPassword){
-        const dataFromBack = await sendData();
+        const dataFromBack = await sendDataSignUp();
         console.log("user with email ",data.email, ' and password ', data.password, 'signed up.');
         setData({email:'', password:'', name:'', repeatedPassword:''});
         props.history.push('/log')

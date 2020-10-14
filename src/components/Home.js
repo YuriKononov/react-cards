@@ -9,7 +9,7 @@ function Home() {
 
   
   const [users, setUsers] = useState([])
-
+//in redux
   const deleteUser = async (_id) => {
     try{
       const users =
@@ -33,7 +33,7 @@ function Home() {
       throw(error)
     }
   }
-
+//in redux
   const getUsers = async () => {
     try {
         //const {data} = await axios.get('https://jsonplaceholder.typicode.com/users')
@@ -45,6 +45,7 @@ function Home() {
     }
     
   }
+  //не знаю как в редакс
   useEffect(() => {
     getUsers();
   },[])

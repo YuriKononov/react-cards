@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
 function LoginForm(props) {
 
     const [data, setData] = useState({email:'', password:''})
-
-const sendData = async () => {
+//added
+const sendDataLogin = async () => {
     const res = await axios(
         {
           method: "POST",
@@ -57,7 +57,7 @@ const handleOnChange = (e) => {
 }
 
 const handleSubmitLogin = async () => {
-    const dataFromBack = await sendData();
+    const dataFromBack = await sendDataLogin();
     console.log(dataFromBack)
     setData({email:'', password:''});
     localStorage.setItem('auth-token', dataFromBack.data.authToken);
