@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link, Redirect } from 'react-router-dom';
+import { getUsers, deleteUser, addUser, editUser } from '../actions'
+import{ useSelector, useDispatch} from 'react-redux';
 
 
 
@@ -28,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ButtonAppBar() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const logout = () => {
     localStorage.removeItem('auth-token');
@@ -37,6 +40,13 @@ export default function ButtonAppBar() {
     
   }
 
+  const name= 'aaa';
+  const email= 'bbb';
+  const company= 'ccc';
+  const description= 'ddd';
+  const formData = {name, email, company, description}
+
+  
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -56,7 +66,13 @@ export default function ButtonAppBar() {
           </Link>
           <Link to={`/log`} className = {classes.link}><Button color="inherit">Sign in</Button></Link>
           <Link to={`/reg`} className = {classes.link}><Button color="inherit">Sign up</Button></Link>
-          <Link to={`/log`} className = {classes.link}><Button color="inherit" onClick={logout}>Log out</Button></Link>
+          <Link to={`/log`} className = {classes.link}>
+            {localStorage.getItem('name') ? <Button color="inherit" onClick={logout}>Log out</Button> : null}
+          </Link>
+          <Button color="inherit" onClick={() => dispatch(getUsers())}>GET</Button>
+          <Button color="inherit" onClick={() => dispatch(deleteUser("5f8820f8b8f6f20a91ee0aba"))}>DEL</Button>
+          <Button color="inherit" onClick={() => dispatch(addUser(name, email, company, description))}>ADD</Button>
+          <Button color="inherit" onClick={() => dispatch(editUser(formData, "5f883457136e621fbaf52a96"))}>edit</Button>
         </Toolbar>
       </AppBar>
     </div>

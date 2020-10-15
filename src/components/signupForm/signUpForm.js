@@ -75,6 +75,7 @@ const handleSubmitSignUp = async () => {
                     value={data.email}
                     onChange={handleOnChange}
                 />
+                <div></div>
                 <Input
                     className={classes.inp}
                     placeholder="Name"
@@ -83,6 +84,7 @@ const handleSubmitSignUp = async () => {
                     value={data.name}
                     onChange={handleOnChange}
                 />
+                <div></div>
                 <Input
                     className={classes.inp}
                     type='password'
@@ -92,6 +94,7 @@ const handleSubmitSignUp = async () => {
                     value={data.password}
                     onChange={handleOnChange}
                 />
+                <div></div>
                 <Input
                     className={classes.inp}
                     type="password"
@@ -101,6 +104,7 @@ const handleSubmitSignUp = async () => {
                     value={data.repeatedPassword}
                     onChange={handleOnChange}
                 />
+                <div></div>
                 <div className={classes.btns}>
                     <Button color="primary" onClick={handleSubmitSignUp} variant="outlined">
                         Sign up

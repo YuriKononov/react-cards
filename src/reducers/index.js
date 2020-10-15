@@ -1,66 +1,43 @@
 
-const getInitialState = () => ({
+const getInitialState = {
     users : [],
-    user :{}
-  });
+    curUser : {},
+    isLoading: false,
+    error: ''
+  };
 //https://habr.com/ru/post/483314/
 
-  const allReducer = (state = getInitialState(), action) => {
+  const allReducer = (state = getInitialState, action) => {
     switch(action.type){
 
-        case 'GET_USERS':
-            try {
-                const {data} = await axios.get('http://localhost:8080/cards')
-                return {...state, users : data}
-            }
-            catch(error){
-                throw(error)
-            }
+        case 'GET_USERS_LOADING': 
+          return {...state,
+                  isLoading : true};
+
+        case 'GET_USERS_SUCCESS': 
+          return {...state,
+                  users : action.payload,
+                  isLoading : false};
+
+        case 'GET_USERS_FAILED': 
+          return {...state,
+                  error : action.payload};
         
-        case 'SEND_DATA':
-            break;
+        case 'DELETE_USER': 
+          return {...state,
+                  users: action.payload};
 
-
-        case 'DELETE_USER':
-            try{
-                const users =
-                await axios(
-                {
-                    method: "DELETE",
-                    url: "http://localhost:8080/cards",
-                    data: {
-                            _id: action._id
-                        }
-                }
-            );
-            return {...state, users : users.data};
-            }
-            catch(err){
-                throw(err)
-            }
-            
         case 'EDIT_USER':
-            try {
-                user = {};
-                const {data} = await axios(
-                  {
-                    method: "PATCH",
-                    url: "http://localhost:8080/cards",
-                    data: {
-                      _id : props.match.params.id,
-                      ...action.formData
-                    }
-                  }
-                  
-                );
-                //как добавить обновленного юзера?
-                const editedUser = data.find(user => user._id ===_id)
-                return {...state,
-                    users: users, user:editedUser}
-              }
-              catch(error){
-                throw(error)
-              }
+          return {...state, 
+                  curUser: action.payload.user,
+                  users : action.payload.users};
+
+        case 'ADD_USER':
+          return {...state, 
+                  users : action.payload};
+
+        
+        
 
 
         default:
