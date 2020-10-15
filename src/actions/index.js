@@ -51,7 +51,6 @@ export const getUsers = () => async (dispatch) => {
     try {
         dispatch({type: 'GET_USERS_LOADING'});
         const { data } = await axios.get('http://localhost:8080/cards');
-        console.log('DATA', data);
         dispatch({ type: 'GET_USERS_SUCCESS', payload: data });
 
     } catch (err) {
@@ -60,14 +59,14 @@ export const getUsers = () => async (dispatch) => {
     }
 } 
 
-export const addUser = (name, email, company, description) => async (dispatch) => {
+export const addUser = (data) => async (dispatch) => {
     try {
         await axios.post('http://localhost:8080/cards',
                         {
-                            name,
-                            email,
-                            company,
-                            description
+                            name : data.name,
+                            email : data.email,
+                            company : data.company,
+                            description : data.description
                         });
         const users = await axios.get('http://localhost:8080/cards');
         dispatch({ type: 'ADD_USER', payload: users.data });

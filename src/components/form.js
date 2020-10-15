@@ -1,17 +1,23 @@
-import React from 'react';
+import React ,{useState, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { getUsers, deleteUser, addUser, editUser } from '../actions';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import{ useSelector, useDispatch} from 'react-redux';
 
 
 export default function AddForm(props) {
-    const [open, setOpen] = React.useState(false);
-    
+  const dispatch = useDispatch();
+    const [open, setOpen] = useState(false);
+    const [data, setData] = useState({name:'',email:'',company:'',description:''})
+
+    const handleOnChange = (e) => {
+      setData({...data, [e.target.id]:e.target.value})
+    }
   
     const useStyles = makeStyles((theme) => ({
         button: {
@@ -31,8 +37,9 @@ export default function AddForm(props) {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.handleSubmit(e);
+        dispatch(addUser(data))
         handleClose();
+        setData({name:'',email:'',company:'',description:''})
     }
     
     
@@ -52,8 +59,8 @@ export default function AddForm(props) {
               id="name"
               label="Name"
               fullWidth
-              onChange={props.handleNameChange}
-              value={props.data.name}
+              onChange={handleOnChange}
+              value={data.name}
             />
             <TextField
               
@@ -61,16 +68,16 @@ export default function AddForm(props) {
               id="email"
               label="Email Address"
               fullWidth
-              onChange={props.handleEmailChange}
-              value={props.data.email}
+              onChange={handleOnChange}
+              value={data.email}
             />
             <TextField
              
               margin="dense"
               id="company"
               label="Company"
-              onChange={props.handleCompanyChange}
-              value={props.data.company}
+              onChange={handleOnChange}
+              value={data.company}
               fullWidth
             />
             <TextField
@@ -78,8 +85,8 @@ export default function AddForm(props) {
               margin="dense"
               id="description"
               label="Description"
-              onChange={props.handleDescriptionChange}
-              value={props.data.description}
+              onChange={handleOnChange}
+              value={data.description}
               fullWidth
             />
               </form>

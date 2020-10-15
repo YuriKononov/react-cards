@@ -15,6 +15,8 @@ import Paper from '@material-ui/core/Paper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import { getUsers, deleteUser, addUser, editUser } from '../actions';
+import{ useSelector, useDispatch} from 'react-redux';
 
 
 
@@ -63,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function CardItem(props) {
+  const dispatch = useDispatch();
     const {user} = props;
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
@@ -136,7 +139,7 @@ export default function CardItem(props) {
                                   <MenuItem onClick={handleClose}>
                                     <Link className = {classes.link} to = {`/user/${user._id}`}>Profile</Link>
                                     </MenuItem>
-                                  <MenuItem onClick={() => (props.deleteUsers(user._id))}>Delete</MenuItem>
+                                  <MenuItem onClick={() => (dispatch(deleteUser(user._id)))}>Delete</MenuItem>
                                   </MenuList>
                                   </ClickAwayListener>
                                  

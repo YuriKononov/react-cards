@@ -40,6 +40,9 @@ export default function ButtonAppBar() {
     
   }
 
+  const add2 = () => {
+    dispatch(addUser(formData))
+  }
   const name= 'aaa';
   const email= 'bbb';
   const company= 'ccc';
@@ -70,8 +73,9 @@ export default function ButtonAppBar() {
             {localStorage.getItem('name') ? <Button color="inherit" onClick={logout}>Log out</Button> : null}
           </Link>
           <Button color="inherit" onClick={() => dispatch(getUsers())}>GET</Button>
-          <Button color="inherit" onClick={() => dispatch(deleteUser("5f8820f8b8f6f20a91ee0aba"))}>DEL</Button>
+          <Button color="inherit" onClick={() => dispatch(deleteUser("5f883adf136e621fbaf52a9c"))}>DEL</Button>
           <Button color="inherit" onClick={() => dispatch(addUser(name, email, company, description))}>ADD</Button>
+          <Button color="inherit" onClick={() => add2()}>ADD2</Button>
           <Button color="inherit" onClick={() => dispatch(editUser(formData, "5f883457136e621fbaf52a96"))}>edit</Button>
         </Toolbar>
       </AppBar>

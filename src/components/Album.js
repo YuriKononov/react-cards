@@ -1,9 +1,11 @@
-import React from 'react';
-
+import React ,{useState, useEffect} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { getUsers, deleteUser, addUser, editUser } from '../actions';
+import{ useSelector, useDispatch} from 'react-redux';
+
 
 
 import CardItem from './cardItem'
@@ -41,25 +43,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Album(props) {
+  const dispatch = useDispatch();
   const classes = useStyles();
+  const users = useSelector(state => state.users)
   
+  useEffect(() => {
+    dispatch(getUsers());
+  },[])
 
   return (
     <React.Fragment>
       <CssBaseline />
       <main>
-        {/* Hero unit */}
+        
         <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
+          
           <Grid container spacing={4}>
             {
-            props.users && props.users.length?
-            props.users.slice(0, props.limit)
+            users && users.length?
+            users.slice(0, props.limit)
             .map((user) => (
               <Grid item key={user._id} xs={12} sm={4} md={4}>
                 <CardItem
                 key = {user._id}
-                deleteUsers = {props.deleteUsers}
                 user = {user} />
               </Grid>
             )):<p>Loading...</p>

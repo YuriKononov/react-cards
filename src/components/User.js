@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import {withRouter} from 'react-router-dom';
 import EditForm from './editForm';
 import Tags from './tags'
+import { getUsers, deleteUser, addUser, editUser } from '../actions';
+import{ useSelector, useDispatch} from 'react-redux';
 
 
 const useStyles = makeStyles({
@@ -58,33 +60,35 @@ const useStyles = makeStyles({
 
 
 const User = (props) => {
+    const dispatch = useDispatch();
+
     const [user, setUser] = useState(null);
     const classes = useStyles();
     let _id = props.match.params.id;
 
 
 
-    const editUser = async (formData) => {
-      try {
-        const {data} = await axios(
-          {
-            method: "PATCH",
-            url: "http://localhost:8080/cards",
-            data: {
-              _id : props.match.params.id,
-              ...formData
-            }
-          }
-          
-        );
-        console.log('data', data)
-        const user = data.find(user => user._id ===_id)
-        setUser(user)
-      }
-      catch(error){
-        throw(error)
-      }
-    }
+   // const editCard = async (formData) => {
+   //   try {
+   //     const {data} = await axios(
+   //       {
+   //         method: "PATCH",
+   //         url: "http://localhost:8080/cards",
+   //         data: {
+   //           _id : props.match.params.id,
+   //           ...formData
+   //         }
+   //       }
+   //       
+   //     );
+   //     console.log('data', data)
+   //     const user = data.find(user => user._id ===_id)
+   //     setUser(user)
+   //   }
+   //   catch(error){
+   //     throw(error)
+   //   }
+   // }
 
     const addTag = (tag) => {
       const tempUser = {...user};
@@ -99,30 +103,18 @@ const User = (props) => {
     }
 
     const deleteTag = (tagToDelete) => {
-      console.log(tagToDelete)
       const newTags = [...user.tags].filter((tag) => tag !== tagToDelete);
       const tempUser = {...user, tags:newTags};
       editUser(tempUser)
     }
 
-    const deleteUser = async () => {
-      try{
-        await axios(
-          {
-            method: "DELETE",
-            url: "http://localhost:8080/cards",
-            data: {
-              _id
-            }
-          }
-        )
-        props.history.push('/contacts')
+    const deleteCard = () => {
 
-      }
-      catch(error){
-        throw(error)
-      }
-    }
+      dispatch(deleteUser(_id))
+      props.history.push('/contacts')
+     
+     }
+    
 
     const getUser = async () => {
         try {
@@ -141,7 +133,6 @@ const User = (props) => {
         getUser();
         
       },[])
-      console.log('user',user)
     return(
         <div>
             
@@ -157,12 +148,12 @@ const User = (props) => {
                     />
                     </CardActionArea>
                     <CardActions>
-                    <Button  color="primary" onClick={deleteUser} variant="outlined">
+                    <Button  color="primary" onClick={deleteCard} variant="outlined">
                     Delete
                     </Button>
                     <EditForm data = {user}
                     formName = 'Edit'
-                    editUser = {editUser}/>
+                    />
                 </CardActions>
                 
             </Card>

@@ -4,13 +4,16 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+import { getUsers, deleteUser, addUser, editUser } from '../actions';
+import{ useSelector, useDispatch} from 'react-redux';
 
 
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 export default function EditForm(props) {
-    const [open, setOpen] = React.useState(false);
+    const dispatch = useDispatch();
+    const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
         name: props.data.name,
         email: props.data.email,
@@ -38,7 +41,7 @@ export default function EditForm(props) {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.editUser(formData);
+        dispatch(editUser(formData));
         handleClose();
     }
     
