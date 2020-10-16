@@ -22,8 +22,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-    getUsers,
-  } from '../../actions/userActions';
+    getProjects,
+  } from '../../actions/projectActions';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -219,10 +219,10 @@ export default function ProjectsTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const rows = useSelector((state) => state.users.users);
+  const rows = useSelector((state) => state.projects.projects);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getProjects());
   }, []);
 
   const handleRequestSort = (event, property) => {
@@ -311,7 +311,7 @@ export default function ProjectsTable() {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row._id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -323,9 +323,9 @@ export default function ProjectsTable() {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.email}</TableCell>
-                      <TableCell align="right">{row.company}</TableCell>
-                      <TableCell align="right">{row.description}</TableCell>
+                      <TableCell align="right">{row.status}</TableCell>
+                      <TableCell align="right">{row.price}</TableCell>
+                      <TableCell align="right">{row.devs}</TableCell>
                       <TableCell align="right">{row.protein}</TableCell>
                     </TableRow>
                   );

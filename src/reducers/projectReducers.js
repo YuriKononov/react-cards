@@ -24,7 +24,7 @@ const projectReducer = (state = getInitialState, action) => {
     case GET_PROJECTS_SUCCESS:
       return {
         ...state,
-        users: action.payload,
+        projects: action.payload,
         isLoading: false,
       };
 
@@ -37,19 +37,19 @@ const projectReducer = (state = getInitialState, action) => {
     case DELETE_PROJECT:
       return {
         ...state,
-        users: action.payload,
+        projects: action.payload,
       };
 
     case EDIT_PROJECT:
       return {
         ...state,
-        users: action.payload,
+        project: action.payload,
       };
 
     case ADD_PROJECT:
       return {
         ...state,
-        users: action.payload,
+        projects: action.payload,
       };
 
     default:

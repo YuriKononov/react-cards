@@ -3,10 +3,11 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuAppBar from '../navbar';
 import ProjectsTable from './projectTable';
+import AddProject from './addProject';
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    margin: theme.spacing(10, 5, 10),
+    margin: theme.spacing(5, 5, 10),
   },
 }));
 
@@ -17,6 +18,7 @@ function Projects() {
       <MenuAppBar />
       <Container>
         <div className={classes.table}>
+          <AddProject />
           <ProjectsTable />
         </div>
 
