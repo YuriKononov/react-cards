@@ -1,14 +1,14 @@
-import React ,{useState, useEffect} from 'react';
+import React, { useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { getUsers, deleteUser, addUser, editUser } from '../actions';
-import{ useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  getUsers,
+} from '../actions';
 
-
-
-import CardItem from './cardItem'
+import CardItem from './cardItem';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -45,35 +45,36 @@ const useStyles = makeStyles((theme) => ({
 export default function Album(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const users = useSelector(state => state.users)
-  
+  const users = useSelector((state) => state.users);
+
   useEffect(() => {
     dispatch(getUsers());
-  },[])
+  }, []);
 
   return (
-    <React.Fragment>
+    <div>
       <CssBaseline />
       <main>
-        
+
         <Container className={classes.cardGrid} maxWidth="md">
-          
+
           <Grid container spacing={4}>
             {
-            users && users.length?
-            users.slice(0, props.limit)
-            .map((user) => (
-              <Grid item key={user._id} xs={12} sm={4} md={4}>
-                <CardItem
-                key = {user._id}
-                user = {user} />
-              </Grid>
-            )):<p>Loading...</p>
+            users && users.length
+              ? users.slice(0, props.limit)
+                .map((user) => (
+                  <Grid item key={user._id} xs={12} sm={4} md={4}>
+                    <CardItem
+                      key={user._id}
+                      user={user}
+                    />
+                  </Grid>
+                )) : <p>Loading...</p>
             }
           </Grid>
         </Container>
       </main>
       {/* End footer */}
-    </React.Fragment>
+    </div>
   );
 }

@@ -6,20 +6,23 @@ import Contacts from './components/contacts/contacts';
 import SignUpForm from './components/signupForm/signUpForm';
 import LoginForm from './components/signupForm/loginForm';
 import PrivatePath from './components/privatePath';
+import Projects from './components/projects/projects';
+
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <Switch>
-          <Route exact path='/' component={Home} />
-          <PrivatePath path='/user/:id' component={User} />
-          <PrivatePath exact path='/contacts' component={Contacts} />
-          <Route path='/reg' component={SignUpForm} />
-          <Route path='/log' component={LoginForm} />
+          <Route exact path="/" component={Home} />
+          <PrivatePath path="/user/:id" component={User} />
+          <PrivatePath exact path="/contacts" component={Contacts} />
+          <PrivatePath exact path="/projects" component={Projects} />
+          <Route path="/reg" component={SignUpForm} />
+          <Route path="/log" component={LoginForm} />
         </Switch>
       </div>
     </BrowserRouter>
-    
+
   );
 }
 

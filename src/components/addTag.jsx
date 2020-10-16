@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,9 +11,9 @@ export default function AddTag(props) {
   const [open, setOpen] = React.useState(false);
   const [tag, setTag] = useState('');
 
-  const handleChange =(e) => {
+  const handleChange = (e) => {
     setTag(e.target.value);
-}
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,7 +26,7 @@ export default function AddTag(props) {
   return (
     <div>
       <Button color="primary" onClick={handleClickOpen}>
-       ➕
+        ➕
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Tag</DialogTitle>
@@ -47,7 +47,7 @@ export default function AddTag(props) {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={() => {props.addNewTag(tag)}} color="primary">
+          <Button onClick={() => { props.addNewTag(tag); }} color="primary">
             Add
           </Button>
         </DialogActions>

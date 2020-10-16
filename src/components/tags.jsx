@@ -6,13 +6,14 @@ import AddTag from './addTag';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    boxShadow: '0 0 10px rgba(0,0,0,0.5)',
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
     listStyle: 'none',
     padding: theme.spacing(0.5),
     marginTop: 20,
-    maxWidth: 250
+    maxWidth: 250,
   },
   chip: {
     margin: theme.spacing(0.5),
@@ -21,31 +22,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Tags(props) {
   const classes = useStyles();
-  //const [chipData, setChipData] = React.useState(
-    //props.tags
-  //);
-
 
   const addNewTag = (labelFromForm) => {
     props.addTag(labelFromForm);
-  }
-
+  };
 
   return (
     <Paper component="ul" className={classes.root}>
-      {props.tags.map((tag) => {
-
-        return (
-          <li key={tag}>
-            <Chip
-              label={tag}
-              onDelete={() => {props.deleteTag(tag)}}
-              className={classes.chip}
-            />
-          </li>
-        );
-      })}
-      <AddTag addNewTag = {addNewTag}/>
+      {props.tags.map((tag) => (
+        <li key={tag}>
+          <Chip
+            label={tag}
+            onDelete={() => { props.deleteTag(tag); }}
+            className={classes.chip}
+          />
+        </li>
+      ))}
+      <AddTag addNewTag={addNewTag} />
     </Paper>
   );
 }
