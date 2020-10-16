@@ -13,7 +13,7 @@ import EditForm from './editForm';
 import Tags from './tags';
 import {
   deleteUser, editUser, getUsers,
-} from '../actions';
+} from '../actions/userActions';
 import MenuAppBar from './navbar';
 
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
 const User = (props) => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users);
+  const users = useSelector((state) => state.users.users);
   const _id = props.match.params.id;
 
   const user = users.find((u) => u._id === _id);

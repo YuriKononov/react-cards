@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import { makeStyles } from '@material-ui/core/styles';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useDispatch } from 'react-redux';
-import { addUser } from '../actions';
+import { addUser } from '../actions/userActions';
 
 export default function AddForm(props) {
   const dispatch = useDispatch();

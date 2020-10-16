@@ -23,7 +23,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import { useSelector, useDispatch } from 'react-redux';
 import {
     getUsers,
-  } from '../../actions';
+  } from '../../actions/userActions';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -59,7 +59,7 @@ const headCells = [
     id: 'status', numeric: false, disablePadding: false, label: 'Status',
   },
   {
-    id: 'price', numeric: false, disablePadding: false, label: 'Price ($ per hour)',
+    id: 'price', numeric: true, disablePadding: false, label: 'Price ($ per hour)',
   },
   {
     id: 'devs', numeric: false, disablePadding: false, label: 'Devs',
@@ -219,7 +219,7 @@ export default function ProjectsTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const rows = useSelector((state) => state.users);
+  const rows = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());

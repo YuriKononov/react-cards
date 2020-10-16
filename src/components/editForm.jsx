@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import { useDispatch } from 'react-redux';
 
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { editUser } from '../actions';
+import { editUser } from '../actions/userActions';
 
 export default function EditForm(props) {
   const dispatch = useDispatch();

@@ -6,7 +6,7 @@ import Container from '@material-ui/core/Container';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getUsers,
-} from '../actions';
+} from '../actions/userActions';
 
 import CardItem from './cardItem';
 
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Album(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const users = useSelector((state) => state.users);
+  const users = useSelector((state) => state.users.users);
 
   useEffect(() => {
     dispatch(getUsers());

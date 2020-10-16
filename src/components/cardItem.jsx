@@ -18,7 +18,7 @@ import MenuList from '@material-ui/core/MenuList';
 import { useDispatch } from 'react-redux';
 import {
   deleteUser,
-} from '../actions';
+} from '../actions/userActions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
