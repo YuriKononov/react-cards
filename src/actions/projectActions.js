@@ -30,7 +30,7 @@ export const editProject = (formData, _id) => async (dispatch) => {
     const { data } = await axios(
       {
         method: 'PATCH',
-        url: 'http://localhost:8080/cards',
+        url: 'http://localhost:8080/projects',
         data: {
           _id,
           ...formData,
