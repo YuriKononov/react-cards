@@ -47,7 +47,7 @@ export default function AddTag(props) {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={() => { props.addNewTag(tag); }} color="primary">
+          <Button onClick={() => { props.addNewTag(tag)}} color="primary">
             Add
           </Button>
         </DialogActions>

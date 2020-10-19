@@ -12,8 +12,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { useSelector, useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import EditBtn from './editBtn';
 import { Link } from 'react-router-dom';
+import EditBtn from './editBtn';
+import StatusComponent from './statusComponent';
 import {
   getProjects,
 } from '../../actions/projectActions';
@@ -69,17 +70,18 @@ export default function ProjectsTable() {
       top: 20,
       width: 1,
     },
-    actions : {
-      display: "flex",
+    actions: {
+      paddingTop: 26,
+      display: 'flex',
       justifyContent: 'space-evenly',
-      flexWrap: "wrap"
+      flexWrap: 'wrap',
     },
-    link : {
-      textDecoration : 'none',
+    link: {
+      textDecoration: 'none',
     },
-    linkBtn :{
-      maxHeight: 30,
-    }
+    linkBtn: {
+      margin: theme.spacing(0, 0, 0),
+    },
   }));
 
   const classes = useStyles();
@@ -143,9 +145,9 @@ export default function ProjectsTable() {
     setDense(event.target.checked);
   };
 
-  const actionClick =(event) => {
-    event.stopPropagation()
-  }
+  const actionClick = (event) => {
+    event.stopPropagation();
+  };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -180,6 +182,7 @@ export default function ProjectsTable() {
 
                   return (
                     <TableRow
+                      className={classes.row}
                       hover
                       onClick={(event) => handleClick(event, row._id)}
                       role="checkbox"
@@ -197,14 +200,16 @@ export default function ProjectsTable() {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.name}
                       </TableCell>
-                      <TableCell align="left">{row.status}</TableCell>
+                      <TableCell align="left"><StatusComponent status={row.status} /></TableCell>
                       <TableCell align="left">{row.price}</TableCell>
                       <TableCell align="left">{row.devs}</TableCell>
                       <TableCell align="center" className={classes.actions} onClick={actionClick}>
-                        <EditBtn data={row} _id={row._id}/>
+
+                        <EditBtn data={row} _id={row._id} />
                         <Link to={`/projects/${row._id}`} className={classes.link}>
-                          <Button variant='outlined' className={classes.linkBtn}>Page</Button>
+                          <Button variant="outlined" className={classes.linkBtn}>Page</Button>
                         </Link>
+
                       </TableCell>
                     </TableRow>
                   );

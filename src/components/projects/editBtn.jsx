@@ -43,7 +43,6 @@ export default function AddProject(props) {
   const useStyles = makeStyles((theme) => ({
     button: {
       margin: theme.spacing(0, 0, 0),
-      maxHeight: 30,
     },
     formControl: {
       margin: theme.spacing(1),
@@ -62,7 +61,7 @@ export default function AddProject(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editProject({...data, status},props._id));
+    dispatch(editProject({ ...data, status }, props._id));
     handleClose();
     setData({
       name: '', status: '', price: '', devs: '',
