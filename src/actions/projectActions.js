@@ -8,14 +8,14 @@ import {
   ADD_PROJECT,
 } from './actionTypes';
 
-export const deleteProject = (_id) => async (dispatch) => {
+export const deleteProject = (arrayOfId) => async (dispatch) => {
   try {
     const projects = await axios(
       {
         method: 'DELETE',
         url: 'http://localhost:8080/projects',
         data: {
-          _id,
+          arrayOfId,
         },
       },
     );
