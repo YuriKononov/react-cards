@@ -4,12 +4,13 @@ import {
   GET_PROJECTS_LOADING,
   GET_PROJECTS_SUCCESS,
   GET_PROJECTS_FAILED,
-  ADD_PROJECT,
+  ADD_PROJECT, ADD_DEVELOPERS_TO_PROJECT,
 } from '../actions/actionTypes';
 
 const getInitialState = {
   projects: [],
   isLoading: false,
+  developersToProject: [],
   error: '',
 };
 
@@ -50,6 +51,11 @@ const projectReducer = (state = getInitialState, action) => {
       return {
         ...state,
         projects: action.payload,
+      };
+    case ADD_DEVELOPERS_TO_PROJECT:
+      return {
+        ...state,
+        developersToProject: action.payload,
       };
 
     default:

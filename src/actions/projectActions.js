@@ -6,6 +6,7 @@ import {
   GET_PROJECTS_SUCCESS,
   GET_PROJECTS_FAILED,
   ADD_PROJECT,
+  ADD_DEVELOPERS_TO_PROJECT,
 } from './actionTypes';
 
 export const deleteProject = (arrayOfId) => async (dispatch) => {
@@ -70,3 +71,8 @@ export const addProject = (data) => async (dispatch) => {
     dispatch({ type: GET_PROJECTS_FAILED, payload: err.message });
   }
 };
+
+export const addDevelopersToProject = (devs) => ({
+  type: ADD_DEVELOPERS_TO_PROJECT,
+  payload: devs,
+});

@@ -18,8 +18,13 @@ import StatusComponent from './statusComponent';
 import {
   getProjects,
 } from '../../actions/projectActions';
+import {
+  getUsers,
+} from '../../actions/userActions';
 import EnhancedTableToolbar from './enhancedToolBar';
 import EnhancedTableHead from './tableHead';
+import DevsView from './devsView';
+import DevsField from './devsCheckfield';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -71,7 +76,8 @@ export default function ProjectsTable() {
       width: 1,
     },
     actions: {
-      paddingTop: 26,
+      border: 'none',
+      paddingTop: 'auto',
       display: 'flex',
       justifyContent: 'space-evenly',
       flexWrap: 'wrap',
@@ -95,6 +101,7 @@ export default function ProjectsTable() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProjects());
+    dispatch(getUsers());
   }, []);
 
   const handleRequestSort = (event, property) => {
@@ -202,7 +209,9 @@ export default function ProjectsTable() {
                       </TableCell>
                       <TableCell align="left"><StatusComponent status={row.status} /></TableCell>
                       <TableCell align="left">{row.price}</TableCell>
-                      <TableCell align="left">{row.devs}</TableCell>
+                      <TableCell align="left">
+                        <DevsView data={row} />
+                      </TableCell>
                       <TableCell align="center" className={classes.actions} onClick={actionClick}>
 
                         <EditBtn data={row} _id={row._id} />

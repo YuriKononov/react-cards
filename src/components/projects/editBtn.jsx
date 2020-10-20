@@ -13,7 +13,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { editProject } from '../../actions/projectActions';
 
-export default function AddProject(props) {
+export default function EditProject(props) {
   const [status, setStatus] = useState('');
   const dispatch = useDispatch();
   const [statusOpen, setStatusOpen] = useState(false);

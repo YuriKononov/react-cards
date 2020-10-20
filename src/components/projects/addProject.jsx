@@ -6,12 +6,13 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import { makeStyles } from '@material-ui/core/styles';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { addProject } from '../../actions/projectActions';
+import DevsField from './devsCheckfield';
 
 export default function AddProject(props) {
   const [status, setStatus] = useState('');
@@ -19,7 +20,7 @@ export default function AddProject(props) {
   const [statusOpen, setStatusOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({
-    name: '', status: '', price: '', devs: '',
+    name: '', price: '',
   });
 
   const handleOnChange = (e) => {
@@ -55,13 +56,15 @@ export default function AddProject(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const developers = useSelector((state) => state.projects.developersToProject);
   const handleSubmit = (e) => {
+    const devs = [...developers];
+    console.log('devs in submit', developers);
     e.preventDefault();
-    dispatch(addProject({...data, status}));
+    dispatch(addProject({ ...data, status, devs }));
     handleClose();
     setData({
-      name: '', status: '', price: '', devs: '',
+      name: '', status: '', price: '',
     });
   };
 
@@ -114,15 +117,7 @@ export default function AddProject(props) {
               value={data.price}
               fullWidth
             />
-            <TextField
-              margin="dense"
-              id="devs"
-              label="Developers"
-              onChange={handleOnChange}
-              value={data.devs}
-              fullWidth
-            />
-
+            <DevsField />
           </form>
         </DialogContent>
         <DialogActions>

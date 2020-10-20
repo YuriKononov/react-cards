@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import { deleteProject, getProjects } from '../../actions/projectActions';
 import MenuAppBar from '../navbar';
 import EditBtn from './editBtn';
+import DevsView from './devsView';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -112,9 +113,7 @@ const Project = (props) => {
                 <Typography className={classes.pos} color="textSecondary">
                   Developers
                 </Typography>
-                <Typography variant="h5" component="p" gutterBottom className={classes.break}>
-                  {project.devs}
-                </Typography>
+                <DevsView data={project}/>
               </CardContent>
               <div className={classes.btns}>
                 <Button variant="outlined" onClick={handleDelete}>Delete</Button>
