@@ -44,7 +44,7 @@ const projectReducer = (state = getInitialState, action) => {
     case EDIT_PROJECT:
       return {
         ...state,
-        project: action.payload,
+        projects: action.payload,
       };
 
     case ADD_PROJECT:

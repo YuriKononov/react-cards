@@ -24,7 +24,7 @@ import {
 import EnhancedTableToolbar from './enhancedToolBar';
 import EnhancedTableHead from './tableHead';
 import DevsView from './devsView';
-import DevsField from './devsCheckfield';
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -75,9 +75,11 @@ export default function ProjectsTable() {
       top: 20,
       width: 1,
     },
+    
     actions: {
-      border: 'none',
-      paddingTop: 'auto',
+      border: '1px solid black',
+      marginTop: 'auto',
+      marginBottom: 'auto',
       display: 'flex',
       justifyContent: 'space-evenly',
       flexWrap: 'wrap',
@@ -209,15 +211,17 @@ export default function ProjectsTable() {
                       </TableCell>
                       <TableCell align="left"><StatusComponent status={row.status} /></TableCell>
                       <TableCell align="left">{row.price}</TableCell>
-                      <TableCell align="left">
+                      <TableCell align="left" className={classes.devs}>
                         <DevsView data={row} />
                       </TableCell>
                       <TableCell align="center" className={classes.actions} onClick={actionClick}>
-
+                        
                         <EditBtn data={row} _id={row._id} />
                         <Link to={`/projects/${row._id}`} className={classes.link}>
                           <Button variant="outlined" className={classes.linkBtn}>Page</Button>
                         </Link>
+                        
+                        
 
                       </TableCell>
                     </TableRow>

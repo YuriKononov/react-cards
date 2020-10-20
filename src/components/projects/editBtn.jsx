@@ -6,23 +6,25 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import { makeStyles } from '@material-ui/core/styles';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { editProject } from '../../actions/projectActions';
+import DevsField from './devsCheckfield';
 
 export default function EditProject(props) {
+  const project = useSelector(state => state.projects.projects).filter((ele) => ele._id === props._id)
   const [status, setStatus] = useState('');
   const dispatch = useDispatch();
   const [statusOpen, setStatusOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({
-    name: props.data.name,
-    status: props.data.status,
-    price: props.data.price,
-    devs: props.data.devs,
+    name: project[0].name,
+    status: project[0].status,
+    price: project[0].price,
+    devs: project[0].devs,
   });
 
   const handleOnChange = (e) => {
@@ -58,13 +60,15 @@ export default function EditProject(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const developers = useSelector((state) => state.projects.developersToProject);
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editProject({ ...data, status }, props._id));
+    const devs = [...developers];
+    console.log('devs in edit', developers);
+    dispatch(editProject({ ...data, status, devs }, props._id));
     handleClose();
     setData({
-      name: '', status: '', price: '', devs: '',
+      name: '', status: '', price: ''
     });
   };
 
@@ -117,15 +121,7 @@ export default function EditProject(props) {
               value={data.price}
               fullWidth
             />
-            <TextField
-              margin="dense"
-              id="devs"
-              label="Developers"
-              onChange={handleOnChange}
-              value={data.devs}
-              fullWidth
-            />
-
+            <DevsField />
           </form>
         </DialogContent>
         <DialogActions>
