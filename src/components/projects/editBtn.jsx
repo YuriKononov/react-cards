@@ -13,9 +13,11 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { editProject } from '../../actions/projectActions';
 import DevsField from './devsCheckfield';
+import { editUser } from '../../actions/userActions';
 
 export default function EditProject(props) {
-  const project = useSelector(state => state.projects.projects).filter((ele) => ele._id === props._id)
+  const project = useSelector((state) => state.projects.projects).filter((ele) => ele._id === props._id);
+  const users = useSelector((state) => state.users.users);
   const [status, setStatus] = useState('');
   const dispatch = useDispatch();
   const [statusOpen, setStatusOpen] = useState(false);
@@ -63,13 +65,26 @@ export default function EditProject(props) {
   const developers = useSelector((state) => state.projects.developersToProject);
   const handleSubmit = (e) => {
     e.preventDefault();
+    for (const user of users) {
+      user.projects.splice(user.projects.indexOf(props._id), 1);
+      dispatch(editUser(user));
+    }
     const devs = [...developers];
-    console.log('devs in edit', developers);
-    dispatch(editProject({ ...data, status, devs }, props._id));
-    handleClose();
-    setData({
-      name: '', status: '', price: ''
-    });
+    if (data.name === '' || !data.price === '') {
+      console.log('Missing input!');
+    } else {
+      for (const user of users) {
+        if (devs.includes(user._id)) {
+          user.projects.push(props._id);
+          dispatch(editUser(user));
+        }
+      }
+      dispatch(editProject({ ...data, status, devs }, props._id));
+      handleClose();
+      setData({
+        name: '', status: '', price: '',
+      });
+    }
   };
 
   const classes = useStyles();

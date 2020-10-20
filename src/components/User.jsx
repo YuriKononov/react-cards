@@ -15,6 +15,7 @@ import {
   deleteUser, editUser, getUsers,
 } from '../actions/userActions';
 import MenuAppBar from './navbar';
+import ProjectsView from './projectsView';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -130,6 +131,7 @@ const User = (props) => {
 
               </Card>
               <Tags addTag={addTag} tags={user.tags} deleteTag={deleteTag} />
+              <ProjectsView data={user}/>
             </div>
             <div className={classes.desc}>
               <CardContent>

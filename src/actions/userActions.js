@@ -70,3 +70,4 @@ export const addUser = (data) => async (dispatch) => {
     dispatch({ type: GET_USERS_FAILED, payload: err.message });
   }
 };
+
