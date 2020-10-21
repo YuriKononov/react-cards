@@ -5,6 +5,7 @@ export const GET_USERS_LOADING = 'GET_USERS_LOADING';
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 export const GET_USERS_FAILED = 'GET_USERS_FAILED';
 export const ADD_USER = 'ADD_USER';
+export const ADD_PROJECTS_TO_DEVELOPER = 'ADD_PROJECTS_TO_DEVELOPER';
 
 // projects actions
 export const DELETE_PROJECT = 'DELETE_PROJECT';

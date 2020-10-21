@@ -5,11 +5,13 @@ import {
   GET_USERS_SUCCESS,
   GET_USERS_FAILED,
   ADD_USER,
+  ADD_PROJECTS_TO_DEVELOPER,
 } from '../actions/actionTypes';
 
 const getInitialState = {
   users: [],
   isLoading: false,
+  projectsToDeveloper: [],
   error: '',
 };
 
@@ -51,7 +53,13 @@ const userReducer = (state = getInitialState, action) => {
         ...state,
         users: action.payload,
       };
-      
+
+    case ADD_PROJECTS_TO_DEVELOPER:
+      return {
+        ...state,
+        projectsToDeveloper: action.payload,
+      };
+
     default:
       return state;
   }

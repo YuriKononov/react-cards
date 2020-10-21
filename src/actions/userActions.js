@@ -6,6 +6,7 @@ import {
   GET_USERS_SUCCESS,
   GET_USERS_FAILED,
   ADD_USER,
+  ADD_PROJECTS_TO_DEVELOPER,
 } from './actionTypes';
 
 export const deleteUser = (_id) => async (dispatch) => {
@@ -70,4 +71,9 @@ export const addUser = (data) => async (dispatch) => {
     dispatch({ type: GET_USERS_FAILED, payload: err.message });
   }
 };
+
+export const addProjectsToDeveloper = (projects) => ({
+  type: ADD_PROJECTS_TO_DEVELOPER,
+  payload: projects,
+});
 

@@ -4,6 +4,7 @@ import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
 import AddTag from './addTag';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     boxShadow: '0 0 10px rgba(0,0,0,0.5)',
@@ -28,6 +29,8 @@ export default function Tags(props) {
   };
 
   return (
+    <>
+    
     <Paper component="ul" className={classes.root}>
       {props.tags.map((tag) => (
         <li key={tag}>
@@ -40,5 +43,6 @@ export default function Tags(props) {
       ))}
       <AddTag addNewTag={addNewTag} />
     </Paper>
+    </>
   );
 }

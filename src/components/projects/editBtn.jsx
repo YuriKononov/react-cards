@@ -14,6 +14,7 @@ import Select from '@material-ui/core/Select';
 import { editProject } from '../../actions/projectActions';
 import DevsField from './devsCheckfield';
 import { editUser } from '../../actions/userActions';
+import { useRadioGroup } from '@material-ui/core';
 
 export default function EditProject(props) {
   const project = useSelector((state) => state.projects.projects).filter((ele) => ele._id === props._id);
@@ -66,8 +67,12 @@ export default function EditProject(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     for (const user of users) {
-      user.projects.splice(user.projects.indexOf(props._id), 1);
-      dispatch(editUser(user));
+      console.log(user)
+      if (user.projects.includes(props._id)){
+        user.projects.splice(user.projects.indexOf(props._id), 1);
+        dispatch(editUser(user));
+      }
+      
     }
     const devs = [...developers];
     if (data.name === '' || !data.price === '') {

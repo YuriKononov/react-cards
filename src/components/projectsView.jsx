@@ -21,11 +21,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProjectsView(props) {
   const classes = useStyles();
+  
   const allProjects = useSelector((state) => state.projects.projects);
   const filteredProjects = allProjects.filter((project) => project.devs.includes(props.data._id))
 
 
   return (
+    <>
     <div component="ul" className={classes.root}>
       {filteredProjects.map((project) => (
         <li key={project._id}>
@@ -36,5 +38,7 @@ export default function ProjectsView(props) {
         </li>
       ))}
     </div>
+    
+    </>
   );
 }

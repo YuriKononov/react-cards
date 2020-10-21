@@ -14,8 +14,12 @@ import Tags from './tags';
 import {
   deleteUser, editUser, getUsers,
 } from '../actions/userActions';
+import {
+  getProjects,
+} from '../actions/projectActions';
 import MenuAppBar from './navbar';
 import ProjectsView from './projectsView';
+import EditProjects from './editUserProjectsField';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -101,6 +105,7 @@ const User = (props) => {
 
   useEffect(() => {
     dispatch(getUsers());
+    dispatch(getProjects());
   }, []);
   return (
     <div className={classes.content}>
@@ -132,6 +137,7 @@ const User = (props) => {
               </Card>
               <Tags addTag={addTag} tags={user.tags} deleteTag={deleteTag} />
               <ProjectsView data={user}/>
+              <EditProjects _id={user._id}/>
             </div>
             <div className={classes.desc}>
               <CardContent>
