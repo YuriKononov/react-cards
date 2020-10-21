@@ -59,7 +59,6 @@ export default function AddProject(props) {
   const developers = useSelector((state) => state.projects.developersToProject);
   const handleSubmit = (e) => {
     const devs = [...developers];
-    console.log('devs in submit', developers);
     e.preventDefault();
     dispatch(addProject({ ...data, status, devs }));
     handleClose();

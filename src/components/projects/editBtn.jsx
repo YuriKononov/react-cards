@@ -67,7 +67,6 @@ export default function EditProject(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     for (const user of users) {
-      console.log(user)
       if (user.projects.includes(props._id)){
         user.projects.splice(user.projects.indexOf(props._id), 1);
         dispatch(editUser(user));

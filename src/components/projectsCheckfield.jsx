@@ -73,7 +73,6 @@ export default function ProjectsCheckField(props) {
   };
 
   const handleSubmit = (e) => {
-      console.log(projectID)
     e.preventDefault();
     for (const project of projects) {
       if (project.devs.includes(props._id)) {

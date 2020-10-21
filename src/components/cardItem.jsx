@@ -106,7 +106,7 @@ export default function CardItem(props) {
       <CardHeader
         avatar={(
           <Avatar aria-label="recipe" className={classes.avatar}>
-            Ex
+            {user.name.slice(0,2)}
           </Avatar>
               )}
         action={(
